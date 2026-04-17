@@ -1,0 +1,19 @@
+[package]
+name = "slashcrux"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+authors = ["Joseph O'Brien"]
+license = "MIT OR Apache-2.0"
+description = "Shared vocabulary types for the Slash and Crux agentic Rust ecosystem"
+repository = "https://github.com/89jobrien/slashcrux"
+homepage = "https://github.com/89jobrien/slashcrux"
+keywords = ["agent", "agentic", "workflow", "dsl", "types"]
+categories = ["development-tools", "data-structures"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+indexmap = { version = "2.0", features = ["serde"] }
+
+[dev-dependencies]
