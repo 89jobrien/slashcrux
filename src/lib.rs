@@ -5,12 +5,12 @@
 
 pub mod execution_context;
 pub mod priority;
-pub mod step_status;
+pub mod step_state;
 pub mod urgency;
 
 pub use execution_context::ExecutionContext;
 pub use priority::Priority;
-pub use step_status::StepStatus;
+pub use step_state::StepState;
 pub use urgency::Urgency;
 
 #[cfg(test)]
@@ -25,8 +25,9 @@ mod tests {
         let json_urgency = serde_json::to_string(&Urgency::Immediate).unwrap();
         assert!(!json_urgency.is_empty());
 
-        let json_status = serde_json::to_string(&StepStatus::Running).unwrap();
-        assert!(!json_status.is_empty());
+        let state = StepState::Running;
+        let json_state = serde_json::to_string(&state).unwrap();
+        assert!(!json_state.is_empty());
 
         let ctx = ExecutionContext::new();
         let json_ctx = serde_json::to_string(&ctx).unwrap();
