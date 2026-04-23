@@ -32,9 +32,7 @@ impl ExecutionContext {
 
     /// Get a variable's value.
     pub fn get<S: AsRef<str>>(&self, name: S) -> Option<&Value> {
-        self.variables
-            .get(name.as_ref())
-            .and_then(|v| v.as_ref())
+        self.variables.get(name.as_ref()).and_then(|v| v.as_ref())
     }
 
     /// Check if a variable is set (not None).
@@ -75,11 +73,14 @@ impl ExecutionContext {
         self.variables.is_empty()
     }
 
+    /// Serialize the context to a JSON string.
+    pub fn to_json(&self) -> String {
+        serde_json::to_string(self).unwrap_or_else(|_| "{}".to_string())
+    }
+
     /// Create context from a map.
     pub fn from_map(map: IndexMap<String, Option<Value>>) -> Self {
-        ExecutionContext {
-            variables: map,
-        }
+        ExecutionContext { variables: map }
     }
 }
 
@@ -97,10 +98,7 @@ mod tests {
     fn test_set_and_get() {
         let mut ctx = ExecutionContext::new();
         ctx.set("name", Value::String("Alice".to_string()));
-        assert_eq!(
-            ctx.get("name"),
-            Some(&Value::String("Alice".to_string()))
-        );
+        assert_eq!(ctx.get("name"), Some(&Value::String("Alice".to_string())));
     }
 
     #[test]
@@ -141,10 +139,7 @@ mod tests {
     #[test]
     fn test_json_array() {
         let mut ctx = ExecutionContext::new();
-        let arr = Value::Array(vec![
-            Value::String("a".into()),
-            Value::String("b".into()),
-        ]);
+        let arr = Value::Array(vec![Value::String("a".into()), Value::String("b".into())]);
         ctx.set("items", arr.clone());
         assert_eq!(ctx.get("items"), Some(&arr));
     }
@@ -188,7 +183,10 @@ mod tests {
         let json = serde_json::to_string(&ctx).unwrap();
         let restored: ExecutionContext = serde_json::from_str(&json).unwrap();
 
-        assert_eq!(restored.get("name"), Some(&Value::String("Bob".to_string())));
+        assert_eq!(
+            restored.get("name"),
+            Some(&Value::String("Bob".to_string()))
+        );
         assert_eq!(restored.get("age"), Some(&Value::Number(30.into())));
         assert!(!restored.contains("unset_field"));
     }
