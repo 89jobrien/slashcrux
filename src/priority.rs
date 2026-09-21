@@ -1,3 +1,5 @@
+//! Task priority levels and their relative sorting scores.
+
 use serde::{Deserialize, Serialize};
 
 /// Priority level for tasks and operations.

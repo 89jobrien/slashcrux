@@ -1,3 +1,5 @@
+//! Workflow step lifecycle states and state classification helpers.
+
 use serde::{Deserialize, Serialize};
 
 /// Lifecycle state of a step during workflow execution.

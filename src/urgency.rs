@@ -1,3 +1,5 @@
+//! Task scheduling urgency levels and their relative scores.
+
 use serde::{Deserialize, Serialize};
 
 /// Urgency level for task execution.

@@ -1,3 +1,5 @@
+//! Ordered JSON variable bindings carried through workflow execution.
+
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
