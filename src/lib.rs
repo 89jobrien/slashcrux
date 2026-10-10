@@ -5,11 +5,17 @@
 
 pub mod execution_context;
 pub mod priority;
+pub mod selection;
 pub mod step_state;
 pub mod urgency;
 
 pub use execution_context::ExecutionContext;
 pub use priority::Priority;
+pub use selection::{
+    CatalogCandidate, CommandCatalog, CommandId, InsufficientEvidenceReason, IntentSelection,
+    IntentSelectionAssessment, SelectionContext, SelectionFailure, SelectionRequestId,
+    SelectionResult,
+};
 pub use step_state::StepState;
 pub use urgency::Urgency;
 

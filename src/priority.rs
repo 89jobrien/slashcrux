@@ -3,11 +3,12 @@
 use serde::{Deserialize, Serialize};
 
 /// Priority level for tasks and operations.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Priority {
     Critical,
     High,
+    #[default]
     Medium,
     Low,
     Deferred,
@@ -23,12 +24,6 @@ impl Priority {
             Priority::Low => 2,
             Priority::Deferred => 1,
         }
-    }
-}
-
-impl Default for Priority {
-    fn default() -> Self {
-        Priority::Medium
     }
 }
 

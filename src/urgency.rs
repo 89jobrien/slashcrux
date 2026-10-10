@@ -3,11 +3,12 @@
 use serde::{Deserialize, Serialize};
 
 /// Urgency level for task execution.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Urgency {
     Immediate,
     Soon,
+    #[default]
     Whenever,
     Never,
 }
@@ -21,12 +22,6 @@ impl Urgency {
             Urgency::Whenever => 2,
             Urgency::Never => 1,
         }
-    }
-}
-
-impl Default for Urgency {
-    fn default() -> Self {
-        Urgency::Whenever
     }
 }
 

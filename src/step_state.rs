@@ -7,9 +7,10 @@ use serde::{Deserialize, Serialize};
 /// Represents where a step is in its execution lifecycle, from waiting to start
 /// through to a terminal state. Distinct from step *outcome* (ok/err/rejected),
 /// which is execution-engine-specific.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum StepState {
+    #[default]
     Pending,
     Running,
     Completed,
@@ -35,12 +36,6 @@ impl StepState {
     /// Check if the step is waiting to start.
     pub fn is_waiting(&self) -> bool {
         matches!(self, StepState::Pending)
-    }
-}
-
-impl Default for StepState {
-    fn default() -> Self {
-        StepState::Pending
     }
 }
 
